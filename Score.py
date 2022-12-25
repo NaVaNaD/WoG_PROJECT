@@ -16,7 +16,7 @@ from Utils import SCORES_FILE_NAME
 def add_score(difficulty):
     POINTS_OF_WINNING = int((difficulty * 3) + 5)
     try:
-        f = open(SCORES_FILE_NAME, 'r')
+        f = open(SCORES_FILE_NAME, 'r') #try to open the file, if it doesn't exist then create it in the except'
     except FileNotFoundError :
         f = open(SCORES_FILE_NAME, 'a+')
         f.write('0')
@@ -26,13 +26,13 @@ def add_score(difficulty):
         f = open(SCORES_FILE_NAME, 'w')
         f.write(new_score_str)
         f.close()
-
+        # print(new_score)
     else:
         new_score = int(f.read()) + POINTS_OF_WINNING
         new_score_str = str(new_score)
         f = open(SCORES_FILE_NAME, 'w')
         f.write(new_score_str)
         f.close()
-        print(new_score)
+        # print(new_score)
 
-add_score(7)
+# add_score(7)
