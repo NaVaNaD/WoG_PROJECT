@@ -1,11 +1,14 @@
+from Score import SCORES_FILE_NAME
+from Score import add_score
+from MainScores import score_server
 def welcome(name):
     welcome_sting = f'Hello {name} and welcome to the World of Games (WoG).\nHere you can find many cool games to play.'
+    f = open(SCORES_FILE_NAME, 'w')
+    f.write('0')
     return welcome_sting
 
 
-
-def load_game():
-    global difficulty, game
+def load_game(name):
     validation_game = False
     validation_difficulty = False
     while not validation_game:
@@ -42,4 +45,13 @@ def load_game():
     if game == '3':
         from CurrencyRouletteGame import play
 
-    print(play(difficulty))
+    if play(difficulty, name) is True:
+        print('play true')
+        add_score(difficulty, name) # calculate score
+
+    play_again = input('Do you want to play again? (y/n):')
+    if play_again == 'y' or play_again == 'Y':
+        load_game(name)
+    else:
+        print('Thank you for playing with us, see you soon')
+        score_server(name)    # update html pade with name and score
