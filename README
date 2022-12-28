@@ -1,0 +1,119 @@
+this is project that i did as part of DevOps cours, you can find below the instructions for the game and the different function that i used
+
+
+
+
+World of Games I
+Live.py
+Create a new python program, call it Live.py.
+welcome(name)
+This function has a person name as an input and returns a string in the following layout:
+Hello <name> and welcome to the World of Games (WoG).
+Here you can find many cool games to play.
+load_game()
+This function prints out the following text:
+Please choose a game to play:
+1. Memory Game - a sequence of numbers will appear for 1 second and you have to
+guess it back
+2. Guess Game - guess a number and see if you chose like the computer
+3. Currency Roulette - try and guess the value of a random amount of USD in ILS
+Gets an input from the user about the game he chose. After receiving the game number from
+the user, the function will get the level of difficulty with the following text and also save to a
+variable:
+Please choose game difficulty from 1 to 5:
+The function will check the input of the chosen game (the input suppose to be a number
+between 1 to 3), also will check the input of level of difficulty (input should be a number between
+1 to 5).
+MainGame.py
+The purpose of this file is to call the functions from Live.py, it can be looking as follows:
+from Live import load_game, welcome
+print(welcome("Guy"))
+load_game()
+
+
+
+
+
+World of Games II
+GuessGame.py
+The purpose of guess game is to start a new game, cast a random number between 1 to a
+variable called difficulty. The game will get a number input from the
+Properties
+1. Difficulty
+2. Secret number
+Methods
+1. generate_number - Will generate number between 1 to difficulty and save it to
+secret_number.
+2. get_guess_from_user - Will prompt the user for a number between 1 to difficulty and
+return the number.
+3. compare_results - Will compare the the secret generated number to the one prompted
+by the get_guess_from_user.
+4. play - Will call the functions above and play the game. Will return True / False if the user
+lost or won.
+MemoryGame.py
+The purpose of memory game is to display an amount of random numbers to the users for 0.7
+seconds and then prompt them from the user for the numbers that he remember. If he was right
+with all the numbers the user will win otherwise he will lose.
+Properties
+1. Difficulty
+Methods
+1. generate_sequence - Will generate a list of random numbers between 1 to 101. The list
+length will be difficulty.
+2. get_list_from_user - Will return a list of numbers prompted from the user. The list length
+will be in the size of difficulty.
+3. is_list_equal - A function to compare two lists if they are equal. The function will return
+True / False.
+4. play - Will call the functions above and play the game. Will return True / False if the user
+lost or won.
+CurrencyRouletteGame.py
+This game will use t he free currency api to get the current exchange rate from USD to ILS, will
+generate a new random number between 1-100 a will ask the user what he thinks is the value of
+the generated number from USD to ILS, depending on the user’s difficulty his answer will be
+correct if the guessed value is between the interval surrounding the correct answer
+Properties
+1. Difficulty
+Methods
+1. get_money_interval -Will get the current currency rate from USD to ILS and will
+generate an interval as follows:
+a. for given difficulty d, and total value of money t the interval will be: (t - (5 - d), t +
+(5 - d))
+2. get_guess_from_user - A method to prompt a guess from the user to enter a guess of
+value to a given amount of USD
+3. play - Will call the functions above and play the game. Will return True / False if the user
+lost or won.
+Function Update
+1. Change the function load_game() from the previous document that after it will get the
+user’s game of choice and level of difficulty, it will start a new function of the
+corresponding game with the given difficulty. For example: If a user will choose the first
+option in load_game() function with difficulty 3, it will call the play() function from the
+module MemoryGame with difficulty of 3.
+2. Change the 3rd game description on load_game() function to: Currency Roulette - try
+and guess the value of a random amount of USD in ILS
+
+
+
+
+Utils.py
+A general purpose python file. This file will contain general information and operations we need
+for our game.
+1. SCORES_FILE_NAME - A string representing a file name. By default “Scores.txt”
+2. BAD_RETURN_CODE - A number representing a bad return code for a function.
+3. Screen_cleaner - A function to clear the screen (useful when playing memory game or
+before a new game starts).
+Score.py
+A package that is in charge of managing the scores file.
+The scores file at this point will consist of only a number. That number is the accumulation of the
+winnings of the user. Amount of points for winning a game is as follows:
+POINTS_OF_WINNING = (DIFFICULTY X 3) + 5
+Each time the user is winning a game, the points he one will be added to his current amount of
+point saved in a file.
+Methods
+1. add_score - The function’s input is a variable called difficulty. The function will try to read
+the current score in the scores file, if it fails it will create a new one and will use it to save
+the current score.
+MainScores.py
+This file’s sole purpose is to serve the user’s score currently in the scores.txt file over HTTP with
+HTML. This will be done by using python’s flask library.
+Methods
+1. score_server - This function will serve the score. It will read the score from the scores file
+and will return an HTML

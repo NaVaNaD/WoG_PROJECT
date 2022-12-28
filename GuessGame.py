@@ -1,6 +1,3 @@
-import random
-from Score import add_score
-
 
 # The purpose of guess game is to start a new game, cast a random number between 1 to a
 # variable called difficulty. The game will get a number input from the
@@ -16,6 +13,10 @@ from Score import add_score
 # by the get_guess_from_user.
 # 4. play - Will call the functions above and play the game. Will return True / False if the user
 # lost or won.
+
+import random
+from Score import add_score
+
 
 def generate_number(difficulty):
     secret_number = random.randint(1, difficulty)

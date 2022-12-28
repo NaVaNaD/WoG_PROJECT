@@ -46,7 +46,7 @@ def load_game(name):
         from CurrencyRouletteGame import play
 
     if play(difficulty, name) is True:
-        print('play true')
+        # print('play true') for testing can be removed on production
         add_score(difficulty, name) # calculate score
 
     play_again = input('Do you want to play again? (y/n):')
